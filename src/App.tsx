@@ -1,57 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import { Link, Route, Routes } from "react-router-dom";
+import "./App.css";
+import { OrderPage } from "./components/order/OrderPage";
+import { ProductPage } from "./components/product/ProductPage";
+import { PageNotFound } from "./components/PageNotFound/PageNotFound";
+import Container from "react-bootstrap/esm/Container";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
+import {
+  Header,
+  LinkStyled,
+  MainSection,
+  NavBar,
+} from "./components/mainStyled/mainStyled";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Container style={{ maxWidth: "100%" }}>
+      <Row>
+        <Header>
+          <Col>Header</Col>
+        </Header>
+      </Row>
+      <Row className="justify-content-md-start">
+        <NavBar md={1}>
+          <LinkStyled to="/">Приход</LinkStyled>
+          <LinkStyled to="/product">Продукты</LinkStyled>
+          <LinkStyled to="/">Группы</LinkStyled>
+          <LinkStyled to="/">Пользователи</LinkStyled>
+          <LinkStyled to="/">Настройки</LinkStyled>
+        </NavBar>
+        <MainSection md={11}>
+          <Routes>
+            <Route path="/" element={<OrderPage />} />
+            <Route path="/product" element={<ProductPage />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </MainSection>
+      </Row>
+    </Container>
   );
 }
 
