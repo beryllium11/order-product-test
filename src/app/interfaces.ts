@@ -1,5 +1,12 @@
 export type CurrencyType = "USD" | "UAH";
-export type ProductType = "Monitors" | "TVs" | "Laptops";
+export const PRODUCT_TYPE = {
+  monitors: "Monitors",
+  tvs: "TVs",
+  laptops: "Laptops",
+} as const;
+export type ProductKeyType = keyof typeof PRODUCT_TYPE;
+export type ProductType = (typeof PRODUCT_TYPE)[ProductKeyType];
+export type ProductStatusType = "ready" | "under repair";
 
 export interface IProduct {
   id: number;
@@ -8,6 +15,7 @@ export interface IProduct {
   photo: string;
   title: string;
   type: ProductType;
+  status: ProductStatusType;
   specification: string;
   guarantee: {
     start: string;
